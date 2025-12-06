@@ -1,0 +1,42 @@
+name: Pruebas E2E
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+    
+    - name: Instalar dependencias del backend
+      run: |
+        cd backend
+        npm install
+    
+    - name: Instalar dependencias del frontend
+      run: |
+        cd frontend
+        npm install
+    
+    - name: Instalar dependencias de pruebas
+      run: npm install
+    
+    - name: Instalar Playwright
+      run: npx playwright install --with-deps
+    
+    - name: Ejecutar pruebas E2E
+      run: npm test
+    
+    - name: Resultado exitoso
+      if: success()
+      run: echo "OK"
