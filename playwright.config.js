@@ -18,19 +18,4 @@ module.exports = defineConfig({
       use: { ...devices['Desktop Chrome'] },
     },
   ],
-
-  webServer: process.env.CI ? [
-    {
-      command: 'cd backend && npm start',
-      url: 'http://localhost:3001',
-      reuseExistingServer: false,
-      timeout: 120000,
-    },
-    {
-      command: 'cd frontend && npm start',
-      url: 'http://localhost:3000',
-      reuseExistingServer: false,
-      timeout: 120000,
-    },
-  ] : undefined,
 });

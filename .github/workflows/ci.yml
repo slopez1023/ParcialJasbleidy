@@ -34,6 +34,18 @@ jobs:
     - name: Instalar Playwright
       run: npx playwright install --with-deps
     
+    - name: Iniciar backend en segundo plano
+      run: |
+        cd backend
+        npm start &
+        sleep 5
+    
+    - name: Iniciar frontend en segundo plano
+      run: |
+        cd frontend
+        npm start &
+        sleep 30
+    
     - name: Ejecutar pruebas E2E
       run: npm test
     
